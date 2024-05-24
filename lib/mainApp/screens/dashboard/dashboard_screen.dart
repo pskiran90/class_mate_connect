@@ -1,41 +1,17 @@
-import 'package:class_mate_connect/mainApp/reusables/loader.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../bloc/fetch_students_bloc.dart';
 import '../../constants/lists/lists.dart';
 import '../../reusables/sized_box.dart';
 import 'dashboard_widgets.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
   @override
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<FetchStudentBloc, FetchStudentState>(
-      builder: (context, fsb) {
-        if (fsb is FetchStudentProgress) {
-          return const LoaderContainerWithMessage(message: "Loading");
-        }
-        if (fsb is FetchStudentSuccess) {
-          debugPrint("students data: ${fsb.dataList.toString()}");
-        }
-
-        return const DashboardBody();
-      },
-    );
-  }
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class DashboardBody extends StatefulWidget {
-  const DashboardBody({super.key});
-
-  @override
-  State<DashboardBody> createState() => _DashboardBodyState();
-}
-
-class _DashboardBodyState extends State<DashboardBody> {
+class _DashboardScreenState extends State<DashboardScreen> {
   String selectedMenuName = '';
 
   @override
@@ -50,6 +26,13 @@ class _DashboardBodyState extends State<DashboardBody> {
     setState(() {
       selectedMenuName = selectName;
     });
+  }
+
+  void navigateToScreen(int index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => catogoryScreens[index]),
+    );
   }
 
   @override
@@ -81,6 +64,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                         title: titleName,
                         action: () {
                           changeMenuIndex(titleName);
+                          navigateToScreen(index);
                         },
                         icon: iconName,
                       );
