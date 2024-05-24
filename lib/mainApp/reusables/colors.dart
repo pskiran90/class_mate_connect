@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color(0xFF125C92);
+const Color primaryColor = Color(0xFF6877e0);
 const Color secondaryColor = Color(0xFFF9FEFF);
 const Color primaryColorLight = Color(0xFFbad0df);
 const bgColor = Color(0xFFF2F2F2);
@@ -26,10 +26,10 @@ Color grey3 = Colors.grey[300]!;
 Color lbo2 = Colors.lightBlue.withOpacity(0.2);
 Color lgo2 = Colors.lightGreen.withOpacity(0.2);
 Color lro2 = Colors.red.withOpacity(0.2);
-Color primaryColorwithOpacity = const Color(0xFF125C92).withOpacity(0.30);
-MaterialColor primary = MaterialColor(0xFF125C92, color);
+Color primaryColorwithOpacity = const Color(0xFF6877e0).withOpacity(0.30);
+MaterialColor primary = MaterialColor(0xFF6f5fbe, color);
 Map<int, Color> color = const {
-  50: Color.fromRGBO(18, 92, 146, .1),
+  50: Color.fromRGBO(131, 127, 237, 0.098),
   100: Color.fromRGBO(18, 92, 146, .2),
   200: Color.fromRGBO(18, 92, 146, .3),
   300: Color.fromRGBO(18, 92, 146, .4),

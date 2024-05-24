@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'mainApp/constants/app_constants.dart';
-import 'mainApp/screens/dashboard/dashboard_screen.dart';
+import 'mainApp/bloc/fetch_students_bloc.dart';
+import 'mainApp/constants/strings/app_constants.dart';
+import 'mainApp/main_app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +14,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppConstants.appTitle,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => FetchStudentBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: AppConstants.appTitle,
+        theme: ThemeData(
+          useMaterial3: true,
+          fontFamily: 'Jost',
+          brightness: Brightness.light,
+        ),
+        home: const MainApp(),
       ),
-      home: const DashboardScreen(),
     );
   }
 }
