@@ -1,12 +1,12 @@
-class StudentSummaryList {
-  final List<StudentModel> transactionSummary;
+class StudentsList {
+  final List<StudentModel> studentsList;
 
-  StudentSummaryList({required this.transactionSummary});
+  StudentsList({required this.studentsList});
 
   // Factory constructor to create a StudentSummaryList object from a JSON list
-  factory StudentSummaryList.fromJson(List<dynamic> jsonList) {
-    return StudentSummaryList(
-      transactionSummary: jsonList.map((json) => StudentModel.fromJson(json as Map<String, dynamic>)).toList(),
+  factory StudentsList.fromJson(List<dynamic> jsonList) {
+    return StudentsList(
+      studentsList: jsonList.map((json) => StudentModel.fromJson(json as Map<String, dynamic>)).toList(),
     );
   }
 }

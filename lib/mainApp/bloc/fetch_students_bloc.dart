@@ -19,9 +19,9 @@ class FetchStudentBloc extends Bloc<FetchStudentEvent, FetchStudentState> {
 
         if (response.statusCode == 200) {
           var jsonResponse = jsonDecode(response.body);
-          StudentSummaryList studentSummaryList = StudentSummaryList.fromJson(jsonResponse['students']);
+          StudentsList studentSummaryList = StudentsList.fromJson(jsonResponse['students']);
           
-          emit(FetchStudentSuccess(dataList: studentSummaryList.transactionSummary));
+          emit(FetchStudentSuccess(dataList: studentSummaryList.studentsList));
         } else {
           emit(FetchStudentFailure('Failed to fetch data. Status code: ${response.statusCode}'));
         }

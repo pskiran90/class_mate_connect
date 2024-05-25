@@ -1,34 +1,42 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/strings/app_asset_constants.dart';
 import '../../reusables/colors.dart';
-import '../../reusables/custom_card.dart';
 import '../../reusables/sized_box.dart';
 
 class DashboardCard extends StatelessWidget {
-  const DashboardCard({super.key});
+  final String title;
+  final IconData icon;
+  final Color color;
+
+  const DashboardCard({
+    Key? key,
+    required this.title,
+    required this.icon,
+    required this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.sizeOf(context);
-
-    return CustomCard(
-      color: primaryColor,
+    return Card(
+      color: color.withOpacity(0.3),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Start Learning",
-              style: TextStyle(fontSize: 28, color: white, fontWeight: FontWeight.bold),
+            Icon(
+              icon,
+              color: color,
+              size: 30,
             ),
             hb8,
-            Image.asset(
-              height: size.height * 0.2,
-              width: size.width,
-              AppAssetConstants.learnBg,
-              fit: BoxFit.scaleDown,
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 17,
+                color: textColor,
+              ),
             ),
           ],
         ),
@@ -82,7 +90,7 @@ class CatogoryTile extends StatelessWidget {
               Icon(
                 icon,
                 size: 40,
-                color: isSelected ? white : primary,
+                color: isSelected ? white : black,
               ),
               Text(
                 title,

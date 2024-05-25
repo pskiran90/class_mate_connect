@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/lists/lists.dart';
+import '../../reusables/colors.dart';
 import '../../reusables/sized_box.dart';
 import 'dashboard_widgets.dart';
 
@@ -43,33 +44,58 @@ class _DashboardScreenState extends State<DashboardScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              const Expanded(
-                flex: 3,
-                child: DashboardCard(),
-              ),
-              hb10,
-              Expanded(
-                flex: 6,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                    itemCount: dashboardTitleLists.length,
-                    itemBuilder: (context, index) {
-                      String titleName = dashboardTitleLists[index];
-                      IconData iconName = dashboardIconLists[index];
-                      return CatogoryTile(
-                        count: "5",
-                        key: Key(titleName),
-                        selectedName: selectedMenuName,
-                        title: titleName,
-                        action: () {
-                          changeMenuIndex(titleName);
-                          navigateToScreen(index);
-                        },
-                        icon: iconName,
-                      );
-                    },
+              hb20,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RichText(
+                    text: const TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Hello,\n',
+                          style: TextStyle(
+                            color: black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Good Morning',
+                          style: TextStyle(
+                            color: black,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.menu),
+                  )
+                ],
+              ),
+              hb20,
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 2 / 3,
+                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 8.0,
+                  ),
+                  itemBuilder: (context, index) {
+                    Color cardColor = dashboardCardColors[index % dashboardCardColors.length];
+                    return GestureDetector(
+                      onTap: () => navigateToScreen(index),
+                      child: DashboardCard(
+                        color: cardColor,
+                        icon: dashboardIconLists[index],
+                        title: dashboardTitleLists[index],
+                      ),
+                    );
+                  },
+                  itemCount: dashboardTitleLists.length,
                 ),
               ),
             ],

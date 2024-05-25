@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../reusables/sized_box.dart';
-import '../../models/students_model.dart';
+import '../../models/subjects_model.dart';
 import '../../reusables/colors.dart';
 import '../../reusables/rich_text.dart';
+import '../../reusables/sized_box.dart';
 
-class StudentsTile extends StatelessWidget {
-  const StudentsTile({
+class SubjectsTile extends StatelessWidget {
+  const SubjectsTile({
     super.key,
     required this.action,
     required this.studentsList,
     required this.selectedId,
   });
-  final StudentModel studentsList;
+  final SubjectsModel studentsList;
   final void Function() action;
   final int selectedId;
   @override
@@ -30,11 +30,11 @@ class StudentsTile extends StatelessWidget {
             onTap: action,
             title: CustomRichText(
               title: '${studentsList.name}\n',
-              secondaryTitle: '${studentsList.email}\n',
+              secondaryTitle: '${studentsList.teacher}\n',
             ),
-            trailing: Text(
-              "Age: ${studentsList.age}",
-              style: const TextStyle(fontSize: 15),
+            trailing: CustomRichText(
+              title: '${studentsList.credits}\n',
+              secondaryTitle: 'Credits\n',
             ),
           ),
         ],
