@@ -45,7 +45,7 @@ class ClassRoomsScreen extends StatelessWidget {
                             var selectedClassRoom = fsb.dataList.firstWhere((element) => element.id == index + 1);
                             pushSimple(
                               context,
-                              ClassRoomInformationScreen(student: selectedClassRoom),
+                              ClassRoomInformationScreen(selectedClassRoomId: selectedClassRoom.id),
                             );
                           },
                           studentsList: fsb.dataList[index],
