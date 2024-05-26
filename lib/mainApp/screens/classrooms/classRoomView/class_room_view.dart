@@ -4,10 +4,10 @@ import '../../../models/conference_room_model.dart';
 import '../../../reusables/colors.dart';
 
 class ClassRoomView extends StatelessWidget {
-  final ConferenceRoomModel classRoomModel;
+  final ConferenceRoomModel roomModel;
   const ClassRoomView({
     super.key,
-    required this.classRoomModel,
+    required this.roomModel,
   });
 
   @override
@@ -31,7 +31,7 @@ class ClassRoomView extends StatelessWidget {
             ),
           );
         },
-        itemCount: classRoomModel.size,
+        itemCount: roomModel.size,
       ),
     );
   }

@@ -37,7 +37,7 @@ class ConferenceRoomView extends StatelessWidget {
                 ),
               ),
               Container(
-                color: greyGradient,
+                color: greyShade,
                 width: size.width * 0.6,
                 height: size.height,
               ),

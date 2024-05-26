@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/class_room_model.dart';
+import '../../models/class_room_model.dart';
 
 class FetchClassRoomBloc extends Bloc<FetchClassRoomEvent, FetchClassRoomState> {
   FetchClassRoomBloc() : super(FetchClassRoomInitial()) {

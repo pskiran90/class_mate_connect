@@ -3,7 +3,7 @@ class ConferenceRoomModel {
   final int size;
   final String name;
   final String layout;
-  final int subject;
+  final int? subject;
 
   ConferenceRoomModel({
     required this.id,
@@ -19,8 +19,17 @@ class ConferenceRoomModel {
       size: json['size'] as int,
       name: json['name'] as String,
       layout: json['layout'] as String,
-      subject: json['subject'] as int,
+      subject: parseSubject(json['subject']),
     );
+  }
+  static int parseSubject(dynamic subject) {
+    if (subject is String) {
+      return int.tryParse(subject) ?? 0;
+    } else if (subject is int) {
+      return subject;
+    } else {
+      return 0;
+    }
   }
 
   Map<String, dynamic> toJson() {

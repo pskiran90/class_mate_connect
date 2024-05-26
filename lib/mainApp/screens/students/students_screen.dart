@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../bloc/fetch_students_bloc.dart';
+import '../../bloc/fetchBlocs/fetch_students_bloc.dart';
 import '../../reusables/header.dart';
 import '../../reusables/loader.dart';
 import '../../reusables/navigators.dart';

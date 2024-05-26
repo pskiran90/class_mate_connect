@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../../models/subjects_model.dart';
+import '../../reusables/loader.dart';
+import '../../reusables/navigators.dart';
+import '../../reusables/sized_box.dart';
 import '../../models/conference_room_model.dart';
 import '../../reusables/header.dart';
 import 'classRoomView/class_room_view.dart';
+import 'classRoomView/room_change_button.dart';
+import 'class_rooms.dart';
 import 'conferenceView/conference_room_view.dart';
 
 class ClassRoomInformationScreen extends StatelessWidget {
   final int selectedClassRoomId;
-
+  final List<SubjectsModel> subjects;
   const ClassRoomInformationScreen({
     Key? key,
     required this.selectedClassRoomId,
+    required this.subjects,
   }) : super(key: key);
 
   @override
@@ -22,7 +29,7 @@ class ClassRoomInformationScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            pushSimple(context, const ClassRoomsScreen(),);
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -31,14 +38,17 @@ class ClassRoomInformationScreen extends StatelessWidget {
         future: fetchData(selectedClassRoomId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: LoaderContainerWithMessage(
+              message: "Loading..",
+            ));
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData) {
             return const Center(child: Text('No data found'));
           } else {
-            final classRoomModel = snapshot.data!;
-            final bool isClassRoom = classRoomModel.layout == "classroom";
+            final roomModel = snapshot.data!;
+            final bool isClassRoom = roomModel.layout == "classroom";
             return Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,10 +56,22 @@ class ClassRoomInformationScreen extends StatelessWidget {
                   Header(
                     title: isClassRoom ? "ClassRoom Details" : "Conference Details",
                   ),
-                  SizedBox(
-                    height: size.height - 135,
-                    width: size.width,
-                    child: isClassRoom ? ClassRoomView(classRoomModel: classRoomModel) : ConferenceRoomView(classRoomModel: classRoomModel),
+                  hb20,
+                  SubjectContainer(
+                    roomModel: roomModel,
+                    subjectsList: subjects,
+                  ),
+                  hb20,
+                  SingleChildScrollView(
+                    child: SizedBox(
+                      height: size.height - 240,
+                      width: size.width,
+                      child: isClassRoom
+                          ? ClassRoomView(roomModel: roomModel)
+                          : ConferenceRoomView(
+                              classRoomModel: roomModel,
+                            ),
+                    ),
                   ),
                 ],
               ),

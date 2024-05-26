@@ -5,7 +5,7 @@ import '../../reusables/sized_box.dart';
 import '../../reusables/colors.dart';
 import '../../reusables/rich_text.dart';
 
-class ClassRoomsTile extends StatelessWidget {
+class ClassRoomsTile extends StatefulWidget {
   const ClassRoomsTile({
     super.key,
     required this.action,
@@ -15,25 +15,37 @@ class ClassRoomsTile extends StatelessWidget {
   final ClassRoomModel studentsList;
   final void Function() action;
   final int selectedId;
+
+  @override
+  State<ClassRoomsTile> createState() => _ClassRoomsTileState();
+}
+
+class _ClassRoomsTileState extends State<ClassRoomsTile> {
+  bool isTaped = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 8),
-      decoration: const BoxDecoration(
-        color: greyGradient,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+      decoration: BoxDecoration(
+        color: isTaped ? grey.withOpacity(0.8) : greyShade,
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: Column(
         children: [
           hb8,
           ListTile(
-            onTap: action,
+            onTap: () {
+              setState(() {
+                isTaped = !isTaped;
+              });
+              widget.action();
+            },
             title: CustomRichText(
-              title: '${studentsList.name}\n',
-              secondaryTitle: '${studentsList.layout}\n',
+              title: '${widget.studentsList.name}\n',
+              secondaryTitle: '${widget.studentsList.layout}\n',
             ),
             trailing: CustomRichText(
-              title: '${studentsList.size}\n',
+              title: '${widget.studentsList.size}\n',
               secondaryTitle: 'Seats\n',
             ),
           ),

@@ -5,7 +5,7 @@ import '../../models/students_model.dart';
 import '../../reusables/colors.dart';
 import '../../reusables/rich_text.dart';
 
-class StudentsTile extends StatelessWidget {
+class StudentsTile extends StatefulWidget {
   const StudentsTile({
     super.key,
     required this.action,
@@ -15,25 +15,37 @@ class StudentsTile extends StatelessWidget {
   final StudentModel studentsList;
   final void Function() action;
   final int selectedId;
+
+  @override
+  State<StudentsTile> createState() => _StudentsTileState();
+}
+
+class _StudentsTileState extends State<StudentsTile> {
+  bool isTaped = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 8),
-      decoration: const BoxDecoration(
-        color: greyGradient,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+      decoration: BoxDecoration(
+        color: isTaped ? grey.withOpacity(0.8) : greyShade,
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: Column(
         children: [
           hb8,
           ListTile(
-            onTap: action,
+            onTap: () {
+              setState(() {
+                isTaped = !isTaped;
+              });
+              widget.action();
+            },
             title: CustomRichText(
-              title: '${studentsList.name}\n',
-              secondaryTitle: '${studentsList.email}\n',
+              title: '${widget.studentsList.name}\n',
+              secondaryTitle: '${widget.studentsList.email}\n',
             ),
             trailing: Text(
-              "Age: ${studentsList.age}",
+              "Age: ${widget.studentsList.age}",
               style: const TextStyle(fontSize: 15),
             ),
           ),

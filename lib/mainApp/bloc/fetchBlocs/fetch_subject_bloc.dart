@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/subjects_model.dart';
+import '../../models/subjects_model.dart';
 
 class FetchSubjectsBloc extends Bloc<FetchSubjectsEvent, FetchSubjectsState> {
   FetchSubjectsBloc() : super(FetchSubjectsInitial()) {
@@ -21,7 +21,7 @@ class FetchSubjectsBloc extends Bloc<FetchSubjectsEvent, FetchSubjectsState> {
           var jsonResponse = jsonDecode(response.body);
           SubjectsList subjectsList = SubjectsList.fromJson(jsonResponse['subjects']);
 
-          emit(FetchSubjectsSuccess(dataList: subjectsList.subjects));
+          emit(FetchSubjectsSuccess(subjects: subjectsList.subjects));
         } else {
           emit(FetchSubjectsFailure('Failed to fetch data. Status code: ${response.statusCode}'));
         }
@@ -47,9 +47,9 @@ class FetchSubjectsInitial extends FetchSubjectsState {}
 class FetchSubjectsProgress extends FetchSubjectsState {}
 
 class FetchSubjectsSuccess extends FetchSubjectsState {
-  final List<SubjectsModel> dataList;
+  final List<SubjectsModel> subjects;
 
-  FetchSubjectsSuccess({required this.dataList});
+  FetchSubjectsSuccess({required this.subjects});
 }
 
 class FetchSubjectsFailure extends FetchSubjectsState {

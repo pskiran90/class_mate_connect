@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/students_model.dart';
+import '../../models/students_model.dart';
 
 class FetchStudentBloc extends Bloc<FetchStudentEvent, FetchStudentState> {
   FetchStudentBloc() : super(FetchStudentInitial()) {

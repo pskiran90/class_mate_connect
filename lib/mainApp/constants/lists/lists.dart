@@ -20,13 +20,13 @@ List<IconData> dashboardIconLists = [
 ];
 List<Widget> catogoryScreens = [
   const StudentsScreen(),
-  const SubjectsScreen(),
+  const SubjectsScreen(isSubjectChangable: false),
   const ClassRoomsScreen(),
   const RegistrationScreen(),
 ];
 final List<Color> dashboardCardColors = [
-  greenIconClr,
-  blueIconClr,
-  redIconColor,
-  yellowIconClr,
+  greenClr,
+  blueClr,
+  redColor,
+  yellowClr,
 ];

@@ -1,7 +1,9 @@
+import 'package:class_mate_connect/mainApp/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../bloc/fetch_classrooms_bloc.dart';
+import '../../bloc/fetchBlocs/fetch_classrooms_bloc.dart';
+import '../../bloc/fetchBlocs/fetch_subject_bloc.dart';
 import '../../reusables/header.dart';
 import '../../reusables/loader.dart';
 import '../../reusables/navigators.dart';
@@ -17,50 +19,54 @@ class ClassRoomsScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            pushByReplacing(context, const DashboardScreen());
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
       body: SafeArea(
-        child: BlocBuilder<FetchClassRoomBloc, FetchClassRoomState>(
+        child: BlocBuilder<FetchSubjectsBloc, FetchSubjectsState>(
           builder: (context, fsb) {
-            if (fsb is FetchClassRoomProgress) {
-              return const LoaderContainerWithMessage(
-                message: "Please wait loading Class Room data",
-              );
-            } else if (fsb is FetchClassRoomSuccess) {
-              return Column(
-                children: [
-                  const Header(
-                    title: "Class Rooms",
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemCount: fsb.dataList.length,
-                      itemBuilder: (context, index) {
-                        return ClassRoomsTile(
-                          action: () {
-                            var selectedClassRoom = fsb.dataList.firstWhere((element) => element.id == index + 1);
-                            pushSimple(
-                              context,
-                              ClassRoomInformationScreen(selectedClassRoomId: selectedClassRoom.id),
+            return BlocBuilder<FetchClassRoomBloc, FetchClassRoomState>(
+              builder: (context, fcb) {
+                if (fcb is FetchClassRoomProgress) {
+                  return const LoaderContainerWithMessage(
+                    message: "Please wait loading Class Room data",
+                  );
+                } else if (fcb is FetchClassRoomSuccess && fsb is FetchSubjectsSuccess) {
+                  return Column(
+                    children: [
+                      const Header(
+                        title: "Class Rooms",
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          padding: const EdgeInsets.all(8),
+                          itemCount: fcb.dataList.length,
+                          itemBuilder: (context, index) {
+                            return ClassRoomsTile(
+                              action: () {
+                                var selectedClassRoom = fcb.dataList.firstWhere((element) => element.id == index + 1);
+                                pushSimple(
+                                  context,
+                                  ClassRoomInformationScreen(selectedClassRoomId: selectedClassRoom.id, subjects: fsb.subjects),
+                                );
+                              },
+                              studentsList: fcb.dataList[index],
+                              selectedId: index + 1,
                             );
                           },
-                          studentsList: fsb.dataList[index],
-                          selectedId: index + 1,
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              return const Center(
-                child: Text("Unable to get all table data"),
-              );
-            }
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Center(
+                    child: Text("Unable to get all table data"),
+                  );
+                }
+              },
+            );
           },
         ),
       ),
