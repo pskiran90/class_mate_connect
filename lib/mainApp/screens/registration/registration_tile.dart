@@ -26,6 +26,10 @@ class RegistrationTile extends StatelessWidget {
         children: [
           hb8,
           ListTile(
+            contentPadding: const EdgeInsets.only(
+              bottom: 6,
+              left: 8,
+            ),
             onTap: action,
             title: Text(
               "Registration Id: #${registrationList.id}",

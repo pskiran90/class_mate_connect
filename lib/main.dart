@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'mainApp/bloc/deleteBlocs/delete_registration_bloc.dart';
 import 'mainApp/bloc/fetchBlocs/fetch_classrooms_bloc.dart';
 import 'mainApp/bloc/fetchBlocs/fetch_registration_bloc.dart';
 import 'mainApp/bloc/fetchBlocs/fetch_students_bloc.dart';
@@ -12,7 +13,6 @@ import 'mainApp/main_app.dart';
 
 void main() {
   runApp(const MyApp());
-  
 }
 
 class MyApp extends StatelessWidget {
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => FetchSubjectsBloc()),
         BlocProvider(create: (context) => FetchClassRoomBloc()),
         BlocProvider(create: (context) => FetchRegistrationBloc()),
+        BlocProvider(create: (context) => DeleteRegistrationBloc()),
       ],
       child: MaterialApp(
         title: AppConstants.appTitle,

@@ -5,7 +5,7 @@ import '../../reusables/colors.dart';
 import '../../reusables/rich_text.dart';
 import '../../reusables/sized_box.dart';
 
-class SubjectsTile extends StatefulWidget {
+class SubjectsTile extends StatelessWidget {
   const SubjectsTile({
     super.key,
     required this.action,
@@ -15,38 +15,33 @@ class SubjectsTile extends StatefulWidget {
   final SubjectsModel studentsList;
   final void Function() action;
   final int selectedId;
-
-  @override
-  State<SubjectsTile> createState() => _SubjectsTileState();
-}
-
-class _SubjectsTileState extends State<SubjectsTile> {
-  bool isTaped = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 8),
-      decoration: BoxDecoration(
-        color: isTaped ? grey.withOpacity(0.8) : greyShade,
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
+      decoration: const BoxDecoration(
+        color: greyShade,
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       height: 80,
       child: Column(
         children: [
           hb8,
           ListTile(
+            contentPadding: const EdgeInsets.only(
+              top: 6,
+              left: 8,
+              right: 8,
+            ),
             onTap: () {
-              setState(() {
-                isTaped = !isTaped;
-              });
-              widget.action();
+              action();
             },
             title: CustomRichText(
-              title: '${widget.studentsList.name}\n',
-              secondaryTitle: '${widget.studentsList.teacher}\n',
+              title: '${studentsList.name}\n',
+              secondaryTitle: '${studentsList.teacher}\n',
             ),
             trailing: CustomRichText(
-              title: '${widget.studentsList.credits}\n',
+              title: '${studentsList.credits}\n',
               secondaryTitle: 'Credits\n',
             ),
           ),

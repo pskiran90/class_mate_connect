@@ -1,5 +1,6 @@
-import 'package:class_mate_connect/mainApp/reusables/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../../reusables/colors.dart';
 
 class NewRegistrationTile extends StatelessWidget {
   final String title;

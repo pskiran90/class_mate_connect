@@ -20,16 +20,20 @@ class RegistrationInfoTile extends StatelessWidget {
     Size size = MediaQuery.sizeOf(context);
     return Container(
       width: size.width,
-      height: size.height * 0.1,
+      height: size.height * 0.11,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: greenShade,
+        color: greyShade,
       ),
       child: Center(
         child: ListTile(
           leading: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title),
+              Text(
+                title,
+                style: const TextStyle(fontSize: 15),
+              ),
               Text(secondTitle),
               Text(thirdTitle),
             ],

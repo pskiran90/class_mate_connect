@@ -23,21 +23,23 @@ class StudentsTile extends StatelessWidget {
         color: greyShade,
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
-      child: Column(
-        children: [
-          hb8,
-          ListTile(
-            onTap: action,
-            title: CustomRichText(
-              title: '${studentsList.name}\n',
-              secondaryTitle: '${studentsList.email}\n',
+      child: Center(
+        child: Column(
+          children: [
+            hb8,
+            ListTile(
+              onTap: action,
+              title: CustomRichText(
+                title: '${studentsList.name}\n',
+                secondaryTitle: '${studentsList.email}\n',
+              ),
+              trailing: Text(
+                "Age: ${studentsList.age}",
+                style: const TextStyle(fontSize: 15),
+              ),
             ),
-            trailing: Text(
-              "Age: ${studentsList.age}",
-              style: const TextStyle(fontSize: 15),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

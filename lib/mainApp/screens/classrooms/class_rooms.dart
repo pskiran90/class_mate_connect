@@ -1,10 +1,10 @@
-import 'package:class_mate_connect/mainApp/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/fetchBlocs/fetch_classrooms_bloc.dart';
 import '../../bloc/fetchBlocs/fetch_subject_bloc.dart';
 import '../../reusables/header.dart';
+import '../../main_app.dart';
 import '../../reusables/loader.dart';
 import '../../reusables/navigators.dart';
 import 'class_room_information_screen.dart';
@@ -19,7 +19,7 @@ class ClassRoomsScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            pushByReplacing(context, const DashboardScreen());
+            pushByReplacing(context, const MainApp());
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),

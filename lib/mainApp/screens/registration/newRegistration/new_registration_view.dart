@@ -1,5 +1,3 @@
-import 'package:class_mate_connect/mainApp/reusables/colors.dart';
-import 'package:class_mate_connect/mainApp/screens/registration/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +6,8 @@ import '../../../bloc/fetchBlocs/fetch_students_bloc.dart';
 import '../../../bloc/fetchBlocs/fetch_subject_bloc.dart';
 import '../../../bloc/updateBlocs/registration_bloc.dart';
 import '../../../reusables/buttons.dart';
+import '../../../reusables/colors.dart';
+import '../registration_screen.dart';
 import '../../../reusables/globals.dart';
 import '../../../reusables/header.dart';
 import '../../students/students_screen.dart';
