@@ -62,7 +62,7 @@ class ClassRoomsScreen extends StatelessWidget {
                   );
                 } else {
                   return const Center(
-                    child: Text("Unable to get all table data"),
+                    child: Text("Unable to get data"),
                   );
                 }
               },

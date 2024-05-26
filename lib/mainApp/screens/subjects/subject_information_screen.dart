@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/subjects_model.dart';
+import '../../reusables/navigators.dart';
 import '../../reusables/sized_box.dart';
 import '../../reusables/header.dart';
 import '../../reusables/styles.dart';
@@ -16,7 +17,7 @@ class SubjectInformationScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            removeScreen(context);
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),

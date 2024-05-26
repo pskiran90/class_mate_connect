@@ -57,6 +57,7 @@ class SubjectContainer extends StatelessWidget {
                 context,
                 SubjectsScreen(
                   roomId: roomModel.id,
+                  isRegistration: false,
                   isSubjectChangable: true,
                 ),
               );

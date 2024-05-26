@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../models/registration_model.dart';
 import '../../reusables/sized_box.dart';
-import '../../models/students_model.dart';
 import '../../reusables/colors.dart';
-import '../../reusables/rich_text.dart';
 
-class StudentsTile extends StatelessWidget {
-  const StudentsTile({
+class RegistrationTile extends StatelessWidget {
+  const RegistrationTile({
     super.key,
     required this.action,
-    required this.studentsList,
+    required this.registrationList,
     required this.selectedId,
   });
-  final StudentModel studentsList;
+  final RegistrationModel registrationList;
   final void Function() action;
   final int selectedId;
   @override
@@ -28,13 +27,13 @@ class StudentsTile extends StatelessWidget {
           hb8,
           ListTile(
             onTap: action,
-            title: CustomRichText(
-              title: '${studentsList.name}\n',
-              secondaryTitle: '${studentsList.email}\n',
-            ),
-            trailing: Text(
-              "Age: ${studentsList.age}",
+            title: Text(
+              "Registration Id: #${registrationList.id}",
               style: const TextStyle(fontSize: 15),
+            ),
+            trailing: const Icon(
+              Icons.chevron_right,
+              size: 32,
             ),
           ),
         ],

@@ -19,8 +19,13 @@ List<IconData> dashboardIconLists = [
   Icons.edit,
 ];
 List<Widget> catogoryScreens = [
-  const StudentsScreen(),
-  const SubjectsScreen(isSubjectChangable: false),
+  const StudentsScreen(
+    isRegistration: false,
+  ),
+  const SubjectsScreen(
+    isSubjectChangable: false,
+    isRegistration: false,
+  ),
   const ClassRoomsScreen(),
   const RegistrationScreen(),
 ];

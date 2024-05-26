@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../reusables/navigators.dart';
 import '../../reusables/sized_box.dart';
 import '../../models/students_model.dart';
 import '../../reusables/header.dart';
@@ -16,7 +17,7 @@ class StudentInformationScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            removeScreen(context);
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),

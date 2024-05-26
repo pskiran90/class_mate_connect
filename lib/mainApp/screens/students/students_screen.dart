@@ -2,22 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/fetchBlocs/fetch_students_bloc.dart';
+import '../../reusables/globals.dart';
 import '../../reusables/header.dart';
 import '../../reusables/loader.dart';
 import '../../reusables/navigators.dart';
+import '../registration/newRegistration/new_registration_view.dart';
 import 'student_information_screen.dart';
 import 'students_screen_widgets.dart';
 
 class StudentsScreen extends StatelessWidget {
-  const StudentsScreen({super.key});
+  final bool isRegistration;
+  const StudentsScreen({
+    super.key,
+    required this.isRegistration,
+  });
 
   @override
   Widget build(BuildContext context) {
+    GlobalNotifier().studentNotifier.addListener(
+      () {
+        if (GlobalNotifier().studentNotifier.value != 0) {
+          pushSimple(context, const NewRegistrationScreen());
+        }
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            removeScreen(context);
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
@@ -27,7 +40,7 @@ class StudentsScreen extends StatelessWidget {
           builder: (context, fsb) {
             if (fsb is FetchStudentProgress) {
               return const LoaderContainerWithMessage(
-                message: "Please wait loading for data",
+                message: "Loading students data",
               );
             } else if (fsb is FetchStudentSuccess) {
               return Column(
@@ -38,17 +51,19 @@ class StudentsScreen extends StatelessWidget {
                   Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
-                      itemCount: fsb.dataList.length,
+                      itemCount: fsb.studentsList.length,
                       itemBuilder: (context, index) {
                         return StudentsTile(
                           action: () {
-                            var selectedStudent = fsb.dataList.firstWhere((element) => element.id == index + 1);
-                            pushSimple(
-                              context,
-                              StudentInformationScreen(student: selectedStudent),
-                            );
+                            var selectedStudent = fsb.studentsList.firstWhere((element) => element.id == index + 1);
+                            isRegistration
+                                ? GlobalNotifier().studentNotifier.value = selectedStudent.id
+                                : pushSimple(
+                                    context,
+                                    StudentInformationScreen(student: selectedStudent),
+                                  );
                           },
-                          studentsList: fsb.dataList[index],
+                          studentsList: fsb.studentsList[index],
                           selectedId: index + 1,
                         );
                       },
@@ -58,7 +73,7 @@ class StudentsScreen extends StatelessWidget {
               );
             } else {
               return const Center(
-                child: Text("Unable to get all table data"),
+                child: Text("Unable to get data"),
               );
             }
           },

@@ -11,9 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
-  flutter_bloc: ^8.1.5
-  http: ^1.2.0
+  http: 
+  flutter_bloc: 
 
 dev_dependencies:
   flutter_test:

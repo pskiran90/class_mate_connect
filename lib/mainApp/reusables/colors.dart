@@ -11,6 +11,7 @@ const Color yellowClr = Color(0xFFFDC441);
 const Color greenShade = Color(0xFFAAC9BF);
 
 const Color greyShade = Color(0xFFD1D1D1);
+const Color blueShade = Color(0xFF007AFF);
 
 const Color primaryColorLight = Color(0xFFbad0df);
 

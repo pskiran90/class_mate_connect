@@ -21,7 +21,7 @@ class FetchStudentBloc extends Bloc<FetchStudentEvent, FetchStudentState> {
           var jsonResponse = jsonDecode(response.body);
           StudentsList studentSummaryList = StudentsList.fromJson(jsonResponse['students']);
           
-          emit(FetchStudentSuccess(dataList: studentSummaryList.studentsList));
+          emit(FetchStudentSuccess(studentsList: studentSummaryList.studentsList));
         } else {
           emit(FetchStudentFailure('Failed to fetch data. Status code: ${response.statusCode}'));
         }
@@ -47,9 +47,9 @@ class FetchStudentInitial extends FetchStudentState {}
 class FetchStudentProgress extends FetchStudentState {}
 
 class FetchStudentSuccess extends FetchStudentState {
-  final List<StudentModel> dataList;
+  final List<StudentModel> studentsList;
 
-  FetchStudentSuccess({required this.dataList});
+  FetchStudentSuccess({required this.studentsList});
 }
 
 class FetchStudentFailure extends FetchStudentState {

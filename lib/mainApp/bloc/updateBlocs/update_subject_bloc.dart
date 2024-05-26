@@ -13,10 +13,8 @@ class UpdateSubjectBloc extends Bloc<UpdateSubjectEvent, UpdateSubjectState> {
         var response = await client.patch(
           Uri.parse('http://nibrahim.pythonanywhere.com/classrooms/${event.updateSubjectId}?api_key=0C9eb'),
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          body: 'subject=${event.newSubjectId}', 
+          body: 'subject=${event.newSubjectId}',
         );
-        debugPrint("response: ${response.body.toString()}");
-
         if (response.statusCode == 200) {
           emit(UpdateSubjectSuccess());
         } else {
