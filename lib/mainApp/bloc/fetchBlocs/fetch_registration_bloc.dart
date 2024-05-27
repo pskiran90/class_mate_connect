@@ -16,7 +16,6 @@ class FetchRegistrationBloc extends Bloc<FetchRegistrationEvent, FetchRegistrati
         var response = await client.get(
           Uri.parse('http://nibrahim.pythonanywhere.com/registration/?api_key=0C9eb'),
         );
-        debugPrint("registrationList: ${response.toString()}");
 
         if (response.statusCode == 200) {
           var jsonResponse = jsonDecode(response.body);

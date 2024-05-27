@@ -28,7 +28,7 @@ class DashboardCard extends StatelessWidget {
             Icon(
               icon,
               color: color,
-              size: 30,
+              size: 48,
             ),
             hb8,
             Text(

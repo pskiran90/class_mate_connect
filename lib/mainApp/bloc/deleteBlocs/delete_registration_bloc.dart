@@ -11,16 +11,7 @@ class DeleteRegistrationBloc extends Bloc<DeleteRegistrationEvent, DeleteRegistr
 
       try {
         var url = 'http://nibrahim.pythonanywhere.com/registration/${event.registrationId}?api_key=0C9eb';
-        if (kDebugMode) {
-          debugPrint('Attempting to delete registration at URL: $url');
-        }
-
         var response = await client.delete(Uri.parse(url));
-        
-        if (kDebugMode) {
-          debugPrint('Response status: ${response.statusCode}');
-          debugPrint('Response body: ${response.body}');
-        }
 
         if (response.statusCode == 200) {
           emit(DeleteRegistrationSuccess());

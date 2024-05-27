@@ -96,7 +96,6 @@ class SubjectsScreen extends StatelessWidget {
                                           context,
                                           SubjectInformationScreen(student: selectedSubject),
                                         );
-                              debugPrint("selectedSubject.id: ${GlobalNotifier().subjectNotifier.value}");
                             },
                             studentsList: fsb.subjects[index],
                             selectedId: index + 1,
